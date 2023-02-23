@@ -1,0 +1,14 @@
+{ "countries":
+    [
+        {
+            "name": "Ireland",
+            "location": [53.41291, -8.24389],
+            "gdp_pc": 85267.76474
+        },
+        {
+            "name": "United States",
+            "location": [37.09024, -95.712891],
+            "gdp_pc": 63413.51386
+        }
+    ]
+}
