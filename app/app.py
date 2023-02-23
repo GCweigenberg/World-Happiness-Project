@@ -13,11 +13,6 @@ def root():
     #If we want a button on the homepage
     #return '<h1> Hello  <button> I am Button! </button> </h1>'  
 
-@app.route('/data') 
-#Run function below at webpage route above
-def data():
-    return {'sample':2015, 'json':2015} #list of dictionaries 
-
 #If name is main, run flask
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
