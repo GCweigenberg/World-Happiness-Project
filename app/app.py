@@ -13,30 +13,10 @@ def root():
     #If we want a button on the homepage
     #return '<h1> Hello  <button> I am Button! </button> </h1>'  
 
-@app.route('/happy_2015') 
+@app.route('/data') 
 #Run function below at webpage route above
-def json_2015():
-    return {'sample':2015, 'json':2015}
-
-@app.route('/happy_2016') 
-#Run function below at webpage route above
-def json_2016():
-    return {'sample':2016, 'json':2016}
-
-@app.route('/happy_2017') 
-#Run function below at webpage route above
-def json_2017():
-    return {'sample':2017, 'json':2017}
-
-@app.route('/happy_2018') 
-#Run function below at webpage route above
-def json_2018():
-    return {'sample':2018, 'json':2018}
-
-@app.route('/happy_2019') 
-#Run function below at webpage route above
-def json_2019():
-    return {'sample':2019, 'json':2019}
+def data():
+    return {'sample':2015, 'json':2015} #list of dictionaries 
 
 #If name is main, run flask
 if __name__ == '__main__':
