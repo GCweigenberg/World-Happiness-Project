@@ -118,6 +118,10 @@ var countries = [
   }
 ];
 
+fetch('static/data.json')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+  
 // array to store circles
 var circleMarkers = [];
 
