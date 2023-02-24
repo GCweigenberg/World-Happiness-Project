@@ -1,7 +1,7 @@
-// Create a map object, and set the default layers.
+// Create a map object.
 var myMap = L.map("map", {
-  center: [30, 10],
-  zoom: 2
+  center: [15.5994, -28.6731],
+  zoom: 3
 });
 
 // Add a tile layer.
@@ -118,47 +118,38 @@ var countries = [
   }
 ];
 
-// // Loop through the countries array, and create one marker for each object.
-// for (var i = 0; i < countries.length; i++) {
+// array to store circles
+var circleMarkers = [];
 
-//   // Conditionals for country gdp_pc
-//   var color = "";
-//   if (countries[i].gdp_pc > 100000) {
-//     color = "yellow";
-//   }
-//   else if (countries[i].gdp_pc > 75000) {
-//     color = "blue";
-//   }
-//   else if (countries[i].gdp_pc > 50000) {
-//     color = "green";
-//   }
-//   else {
-//     color = "violet";
-//   }
-
-//   // Add circles to the map.
-//   L.circle(countries[i].location, {
-//     fillOpacity: 0.75,
-//     color: "white",
-//     fillColor: color,
-//     // Adjust the radius.
-//     radius: Math.sqrt(countries[i].gdp_pc) * 500
-//   }).bindPopup(`<h1>${countries[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${countries[i].gdp_pc}</h3>`).addTo(myMap);
-// }
-
-// An array that will store the created cityMarkers
-var countryMarkers = [];
-
+// Loop through the cities array, and create one marker for each city object.
 for (var i = 0; i < countries.length; i++) {
-  // loop through the cities array, create a new marker, and push it to the cityMarkers array
-  countryMarkers.push(
-    L.marker(countries[i].location).bindPopup("<h1>" + countries[i].name + "</h1>")
-  );
+
+  // Conditionals for country gdp_pc
+  var color = "";
+  if (countries[i].gdp_pc > 100000) {
+    color = "yellow";
+  }
+  else if (countries[i].gdp_pc > 75000) {
+    color = "blue";
+  }
+  else if (countries[i].gdp_pc > 50000) {
+    color = "green";
+  }
+  else {
+    color = "violet";
+  }
+
+  // Add circles to the map.
+  circleMarkers.push(L.circle(countries[i].location, {
+    fillOpacity: 0.75,
+    color: "white",
+    fillColor: color,
+    // Adjust the radius.
+    radius: Math.sqrt(countries[i].gdp_pc) * 500
+  }).bindPopup(`<h1>${countries[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${countries[i].gdp_pc}</h3>`));
 }
 
-// Add all the cityMarkers to a new layer group.
-// Now, we can handle them as one group instead of referencing each one individually.
-var countryLayer = L.layerGroup(countryMarkers);
+var circleLayer = L.layerGroup(circleMarkers);
 
 // Only one base layer can be shown at a time.
 var baseMaps = {
@@ -167,9 +158,9 @@ var baseMaps = {
 
 // Overlays that can be toggled on or off
 var overlayMaps = {
-  countries: countryLayer
+  circles: circleLayer
 };
 
-// Pass our map layers into our layer control.
-// Add the layer control to the map.
-L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+L.control.layers(baseMaps, overlayMaps, {
+  collapsed: false
+}).addTo(myMap);

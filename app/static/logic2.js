@@ -6,8 +6,7 @@ var OpenStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png'
 // Create a map object, and set the default layers.
 var myMap = L.map("map", {
   center: [30, 10],
-  zoom: 2,
-  layers: [OpenStreetMap]
+  zoom: 2
 });
 
 // Add Layer Group List
@@ -57,9 +56,8 @@ function createLayerGroup(jsonObject) {
 
 };
 
-fetch('../templates/data.json')
+fetch('data.json')
     .then((response) => response.json())
-    .then((json) => console.log(json))
     .then((json) => createLayerGroup(json));
 
 // Only one base layer can be shown at a time.
