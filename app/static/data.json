@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Luxembourg",
+        "location": [49.815273, 6.129583],
+        "gdp_pc": 116014.6025
+    },
+    {
+        "name": "Bermuda",
+        "location": [32.321384, -64.75737],
+        "gdp_pc": 107079.4798
+    },
+    {
+        "name": "Switzerland",
+        "location": [46.818188, 8.227512],
+        "gdp_pc": 87097.03645
+    },
+    {
+        "name": "Ireland",
+        "location": [53.41291, -8.24389],
+        "gdp_pc": 85267.76474
+    },
+    {
+        "name": "Cayman Islands",
+        "location": [19.513469, -80.566956],
+        "gdp_pc": 85082.52686
+    },
+    {
+        "name": "Norway",
+        "location": [60.472024, 8.468946],
+        "gdp_pc": 67389.91205
+    },
+    {
+        "name": "United States",
+        "location": [37.09024, -95.712891],
+        "gdp_pc": 63413.51386
+    },
+    {
+        "name": "Denmark",
+        "location": [56.26392, 9.501785],
+        "gdp_pc": 61063.31643
+    }
+    ]
