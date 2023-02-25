@@ -31,16 +31,6 @@ function jsonFetch(filepath)  {
 var testData = jsonFetch('data.json');
 console.log(testData);
 
-// get JSON data and set it to the variable
-fetch('static/data.json')
-    .then((response) => response.json())
-    .then(data => {
-      testData = data.data;
-    })
-    .then(() => {
-      console.log(testData[2]);
-    });
-
 // array to store circles
 var circleMarkers = [];
 
