@@ -9,27 +9,77 @@ var map = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// create function to fetch and return a json file
+// test data set
 
-function jsonFetch(filepath)  {
-  let dataFilePath = `static/${filepath}`;
-  let data;
+var testData = { "data": [
+  {
+      "name": "Luxembourg",
+      "location": [49.815273, 6.129583],
+      "gdp_pc": 116014.6025
+  },
+  {
+      "name": "Bermuda",
+      "location": [32.321384, -64.75737],
+      "gdp_pc": 107079.4798
+  },
+  {
+      "name": "Switzerland",
+      "location": [46.818188, 8.227512],
+      "gdp_pc": 87097.03645
+  }
+]};
+
+// create function to fetch and return a json file to dataset list
+
+var layerGroups = [];
+
+function circleLayer(jsonObject) {
+  // array to store circles
+  let circleMarkers = [];
+
+  // Loop through the cities array, and create one marker for each city object.
+  for (var i = 0; i < jsonObject.length; i++) {
+
+    // Conditionals for country gdp_pc
+    var color = "";
+    if (jsonObject[i].gdp_pc > 100000) {
+      color = "yellow";
+    }
+    else if (jsonObject[i].gdp_pc > 75000) {
+      color = "blue";
+    }
+    else if (jsonObject[i].gdp_pc > 50000) {
+      color = "green";
+    }
+    else {
+      color = "violet";
+    }
+
+    // Add circles to the map.
+    circleMarkers.push(L.circle(jsonObject[i].location, {
+      fillOpacity: 0.75,
+      color: "white",
+      fillColor: color,
+      radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
+    }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`));
+  }
+
+  layerGroups.push(L.layerGroup(circleMarkers));
+}
+
+function layerFetch(jsonFile)  {
+  let dataFilePath = `static/${jsonFile}`;
   fetch(dataFilePath)
     .then((response) => response.json())
     .then(json => {
-      data = json.data;
-    })
-    .then(() => {
-      console.log(data);
-    })
-    .then(() => {
-      return data
-    });
+      console.log(json.data)
+      circleLayer(json.data)
+      });
 }
 
 // create variable for JSON data
-var testData = jsonFetch('data.json');
-console.log(testData);
+layerFetch('data.json');
+console.log(layerGroups);
 
 // array to store circles
 var circleMarkers = [];
@@ -71,7 +121,9 @@ var baseMaps = {
 
 // Overlays that can be toggled on or off
 var overlayMaps = {
-  circles: circleLayer
+  circles: layerGroups[0]
+  layer2: layerGroups[1],
+  layer3: layerGroups[2]
 };
 
 L.control.layers(baseMaps, overlayMaps, {
