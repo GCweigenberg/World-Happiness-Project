@@ -76,11 +76,11 @@ function layerFetch(jsonFile)  {
     .then((response) => response.json())
     .then(json => {
       console.log(json.data);
-      layers.layerTest = circleLayer(json.data);
+      return circleLayer(json.data);
     });
 }
 
 // create variable for JSON data
-layerFetch('data.json');
 
-console.log(layers);
+layers.layerTest = layerFetch('data.json');
+console.log(layers.layerTest);
