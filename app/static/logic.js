@@ -1,7 +1,25 @@
-// Create a map object, and set the default layers.
+// Create a map object.
+
+var layers = {
+  layerTest: new L.layerGroup(),
+  json2015: new L.layerGroup(),
+  json2016: new L.layerGroup(),
+  json2017: new L.layerGroup(),
+  json2018: new L.layerGroup(),
+  json2019: new L.layerGroup()
+};
+
 var myMap = L.map("map", {
-  center: [30, 10],
-  zoom: 2
+  center: [15.5994, -28.6731],
+  zoom: 3,
+  layers: [
+    layers.layerTest,
+    layers.json2015,
+    layers.json2016,
+    layers.json2017,
+    layers.json2018,
+    layers.json2019
+  ]
 });
 
 // Add a tile layer.
@@ -9,167 +27,60 @@ var map = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// Country data
-var countries = [
-  {
-    name: "Luxembourg",
-    location: [49.815273, 6.129583],
-    gdp_pc: 116014.6025
-  },
-  {
-    name: "Bermuda",
-    location: [32.321384, -64.75737],
-    gdp_pc: 107079.4798
-  },
-  {
-    name: "Switzerland",
-    location: [46.818188, 8.227512],
-    gdp_pc: 87097.03645
-  },
-  {
-    name: "Ireland",
-    location: [53.41291, -8.24389],
-    gdp_pc: 85267.76474
-  },
-  {
-    name: "Cayman Islands",
-    location: [19.513469, -80.566956],
-    gdp_pc: 85082.52686
-  },
-  {
-    name: "Norway",
-    location: [60.472024, 8.468946],
-    gdp_pc: 67389.91205
-  },
-  {
-    name: "United States",
-    location: [37.09024, -95.712891],
-    gdp_pc: 63413.51386
-  },
-  {
-    name: "Denmark",
-    location: [56.26392, 9.501785],
-    gdp_pc: 61063.31643
-  },
-  {
-    name: "Singapore",
-    location: [1.352083, 103.819836],
-    gdp_pc: 59797.75218
-  },
-  {
-    name: "Iceland",
-    location: [64.963051, -19.020835],
-    gdp_pc: 59270.18005
-  },
-  {
-    name: "Netherlands",
-    location: [52.132633, 5.291266],
-    gdp_pc: 52397.11671
-  },
-  {
-    name: "Sweden",
-    location: [60.128161, 18.643501],
-    gdp_pc: 52274.40879
-  },
-  {
-    name: "Australia",
-    location: [-25.274398, 133.775136],
-    gdp_pc: 51692.84275
-  },
-  {
-    name: "Qatar",
-    location: [25.354826, 51.183884],
-    gdp_pc: 50124.38594
-  },
-  {
-    name: "Finland",
-    location: [61.92411, 25.748151],
-    gdp_pc: 48773.28117
-  },
-  {
-    name: "Austria",
-    location: [47.516231, 14.550072],
-    gdp_pc: 48586.80132
-  },
-  {
-    name: "Hong Kong",
-    location: [22.396428, 114.109497],
-    gdp_pc: 46323.86344
-  },
-  {
-    name: "Germany",
-    location: [51.165691, 10.451526],
-    gdp_pc: 46208.42947
-  },
-  {
-    name: "Germany",
-    location: [51.165691, 10.451526],
-    gdp_pc: 46208.42947
-  },
-  {
-    name: "Belgium",
-    location: [50.503887, 4.469936],
-    gdp_pc: 45159.34822
-  },
-  {
-    name: "Israel",
-    location: [31.046051, 34.851612],
-    gdp_pc: 44168.94364
+// create function to fetch and return a json file to dataset list
+
+var overlays = {
+  'testLayer': layers.layerTest
+};
+
+L.control.layers(null, overlays).addTo(myMap);
+
+function circleLayer(jsonObject) {
+  // array to store circles
+  var circleMarkers;
+
+  // Loop through the cities array, and create one marker for each city object.
+  for (var i = 0; i < jsonObject.length; i++) {
+
+    // Conditionals for country gdp_pc
+    var color = "";
+    if (jsonObject[i].gdp_pc > 100000) {
+      color = "yellow";
+    }
+    else if (jsonObject[i].gdp_pc > 75000) {
+      color = "blue";
+    }
+    else if (jsonObject[i].gdp_pc > 50000) {
+      color = "green";
+    }
+    else {
+      color = "violet";
+    }
+
+    // Add circles to the map.
+    var newMarker = L.circle(jsonObject[i].location, {
+      fillOpacity: 0.75,
+      color: "white",
+      fillColor: color,
+      radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
+    }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`);
+    newMarker.addTo(circleMarkers)
   }
-];
 
-// // Loop through the countries array, and create one marker for each object.
-// for (var i = 0; i < countries.length; i++) {
-
-//   // Conditionals for country gdp_pc
-//   var color = "";
-//   if (countries[i].gdp_pc > 100000) {
-//     color = "yellow";
-//   }
-//   else if (countries[i].gdp_pc > 75000) {
-//     color = "blue";
-//   }
-//   else if (countries[i].gdp_pc > 50000) {
-//     color = "green";
-//   }
-//   else {
-//     color = "violet";
-//   }
-
-//   // Add circles to the map.
-//   L.circle(countries[i].location, {
-//     fillOpacity: 0.75,
-//     color: "white",
-//     fillColor: color,
-//     // Adjust the radius.
-//     radius: Math.sqrt(countries[i].gdp_pc) * 500
-//   }).bindPopup(`<h1>${countries[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${countries[i].gdp_pc}</h3>`).addTo(myMap);
-// }
-
-// An array that will store the created cityMarkers
-var countryMarkers = [];
-
-for (var i = 0; i < countries.length; i++) {
-  // loop through the cities array, create a new marker, and push it to the cityMarkers array
-  countryMarkers.push(
-    L.marker(countries[i].location).bindPopup("<h1>" + countries[i].name + "</h1>")
-  );
+  layers.layerTest = L.layerGroup(circleMarkers);
 }
 
-// Add all the cityMarkers to a new layer group.
-// Now, we can handle them as one group instead of referencing each one individually.
-var countryLayer = L.layerGroup(countryMarkers);
+function layerFetch(jsonFile)  {
+  let dataFilePath = `static/${jsonFile}`;
+  fetch(dataFilePath)
+    .then((response) => response.json())
+    .then(json => {
+      console.log(json.data);
+      layers.layerTest = circleLayer(json.data);
+    });
+}
 
-// Only one base layer can be shown at a time.
-var baseMaps = {
-  Map: map
-};
+// create variable for JSON data
+layerFetch('data.json');
 
-// Overlays that can be toggled on or off
-var overlayMaps = {
-  countries: countryLayer
-};
-
-// Pass our map layers into our layer control.
-// Add the layer control to the map.
-L.control.layers(baseMaps, overlayMaps).addTo(myMap);
+console.log(layers);
