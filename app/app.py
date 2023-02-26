@@ -15,37 +15,37 @@ def root():
 #Run function below at webpage route above
 @app.route('/test')
 def test_data():
-    with open('json_data/data.json') as f:
+    with open('JSON_Data/data.json') as f:
         return json.load(f)
 
 
 @app.route('/data_2015')
 def get_json2015():
-    f = open('JSON_Data/json_2015')
+    f = open('JSON_Data/json_2015-1')
     data2015 = json.load(f)
     return {"data" : data2015}
 
 @app.route('/data_2016')
 def get_json2016():
-    f = open('JSON_Data/json_2016')
+    f = open('JSON_Data/json_2016-1')
     data2016 = json.load(f)
     return {"data" : data2016}
 
 @app.route('/data_2017')
 def get_json2017():
-    f = open('JSON_Data/json_2017')
+    f = open('JSON_Data/json_2017-1')
     data2017 = json.load(f)
     return {"data" : data2017}
 
 @app.route('/data_2018')
 def get_json2018():
-    f = open('JSON_Data/json_2018')
+    f = open('JSON_Data/json_2018-1')
     data2018 = json.load(f)
     return {"data" : data2018}
 
 @app.route('/data_2019')
 def get_json2019():
-    f = open('JSON_Data/json_2019')
+    f = open('JSON_Data/json_2019-1')
     data2019 = json.load(f)
     return {"data" : data2019}
 
