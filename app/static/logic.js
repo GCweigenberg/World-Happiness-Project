@@ -9,33 +9,15 @@ var map = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// test data set
-
-var testData = { "data": [
-  {
-      "name": "Luxembourg",
-      "location": [49.815273, 6.129583],
-      "gdp_pc": 116014.6025
-  },
-  {
-      "name": "Bermuda",
-      "location": [32.321384, -64.75737],
-      "gdp_pc": 107079.4798
-  },
-  {
-      "name": "Switzerland",
-      "location": [46.818188, 8.227512],
-      "gdp_pc": 87097.03645
-  }
-]};
-
 // create function to fetch and return a json file to dataset list
 
-var layerGroups = [];
+var layerGroups = {
+  layerTest: new L.layerGroup()
+};
 
 function circleLayer(jsonObject) {
   // array to store circles
-  let circleMarkers = [];
+  var circleMarkers = [];
 
   // Loop through the cities array, and create one marker for each city object.
   for (var i = 0; i < jsonObject.length; i++) {
@@ -64,7 +46,7 @@ function circleLayer(jsonObject) {
     }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`));
   }
 
-  layerGroups.push(L.layerGroup(circleMarkers));
+  return L.layerGroup(circleMarkers);
 }
 
 function layerFetch(jsonFile)  {
@@ -73,13 +55,14 @@ function layerFetch(jsonFile)  {
     .then((response) => response.json())
     .then(json => {
       console.log(json.data)
-      circleLayer(json.data)
+      layerGroups.push(circleLayer(json.data))
       });
 }
 
 // create variable for JSON data
 layerFetch('data.json');
-console.log(layerGroups);
+
+console.log(layerGroups)
 
 // array to store circles
 var circleMarkers = [];
@@ -122,8 +105,6 @@ var baseMaps = {
 // Overlays that can be toggled on or off
 var overlayMaps = {
   circles: layerGroups[0]
-  layer2: layerGroups[1],
-  layer3: layerGroups[2]
 };
 
 L.control.layers(baseMaps, overlayMaps, {
