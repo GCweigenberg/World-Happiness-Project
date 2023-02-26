@@ -1,7 +1,25 @@
 // Create a map object.
+
+var layers = {
+  layerTest: new L.layerGroup(),
+  json2015: new L.layerGroup(),
+  json2016: new L.layerGroup(),
+  json2017: new L.layerGroup(),
+  json2018: new L.layerGroup(),
+  json2019: new L.layerGroup()
+};
+
 var myMap = L.map("map", {
   center: [15.5994, -28.6731],
-  zoom: 3
+  zoom: 3,
+  layers: [
+    layers.layerTest,
+    layers.json2015,
+    layers.json2016,
+    layers.json2017,
+    layers.json2018,
+    layers.json2019
+  ]
 });
 
 // Add a tile layer.
@@ -11,13 +29,15 @@ var map = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // create function to fetch and return a json file to dataset list
 
-var layerGroups = {
-  layerTest: new L.layerGroup()
+var overlays = {
+  'testLayer': layers.layerTest
 };
+
+L.control.layers(null, overlays).addTo(myMap);
 
 function circleLayer(jsonObject) {
   // array to store circles
-  var circleMarkers = [];
+  var circleMarkers;
 
   // Loop through the cities array, and create one marker for each city object.
   for (var i = 0; i < jsonObject.length; i++) {
@@ -38,15 +58,16 @@ function circleLayer(jsonObject) {
     }
 
     // Add circles to the map.
-    circleMarkers.push(L.circle(jsonObject[i].location, {
+    var newMarker = L.circle(jsonObject[i].location, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
       radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
-    }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`));
+    }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`);
+    newMarker.addTo(circleMarkers)
   }
 
-  return L.layerGroup(circleMarkers);
+  layers.layerTest = L.layerGroup(circleMarkers);
 }
 
 function layerFetch(jsonFile)  {
@@ -54,59 +75,16 @@ function layerFetch(jsonFile)  {
   fetch(dataFilePath)
     .then((response) => response.json())
     .then(json => {
-      console.log(json.data)
-      layerGroups.push(circleLayer(json.data))
-      });
+      console.log(json.data);
+      layerTest = circleLayer(json.data);
+    });
 }
 
 // create variable for JSON data
 layerFetch('data.json');
 
-console.log(layerGroups)
+console.log(layers);
 
-// array to store circles
-var circleMarkers = [];
-
-// Loop through the cities array, and create one marker for each city object.
-for (var i = 0; i < testData.length; i++) {
-
-  // Conditionals for country gdp_pc
-  var color = "";
-  if (testData[i].gdp_pc > 100000) {
-    color = "yellow";
-  }
-  else if (testData[i].gdp_pc > 75000) {
-    color = "blue";
-  }
-  else if (testData[i].gdp_pc > 50000) {
-    color = "green";
-  }
-  else {
-    color = "violet";
-  }
-
-  // Add circles to the map.
-  circleMarkers.push(L.circle(testData[i].location, {
-    fillOpacity: 0.75,
-    color: "white",
-    fillColor: color,
-    // Adjust the radius.
-    radius: Math.sqrt(testData[i].gdp_pc) * 500
-  }).bindPopup(`<h1>${testData[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${testData[i].gdp_pc}</h3>`));
-}
-
-var circleLayer = L.layerGroup(circleMarkers);
-
-// Only one base layer can be shown at a time.
-var baseMaps = {
-  Map: map
-};
-
-// Overlays that can be toggled on or off
-var overlayMaps = {
-  circles: layerGroups[0]
-};
-
-L.control.layers(baseMaps, overlayMaps, {
+L.control.layers(map, overlays, {
   collapsed: false
 }).addTo(myMap);
