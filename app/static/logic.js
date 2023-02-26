@@ -76,7 +76,7 @@ function layerFetch(jsonFile)  {
     .then((response) => response.json())
     .then(json => {
       console.log(json.data);
-      layerTest = circleLayer(json.data);
+      layers.layerTest = circleLayer(json.data);
     });
 }
 
@@ -84,7 +84,3 @@ function layerFetch(jsonFile)  {
 layerFetch('data.json');
 
 console.log(layers);
-
-L.control.layers(map, overlays, {
-  collapsed: false
-}).addTo(myMap);
