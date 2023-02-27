@@ -2163,7 +2163,7 @@ for (var i = 0; i < data.length; i++) {
       color: "white",
       fillColor: color,
       radius: Math.sqrt(data[i].health_life_expectancy) * 200000
-    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br>GDP Per Capita: ${data[i].economy_gdp_per_capita}<br>Family Score: ${data[i].family_info}<br><b>Life Expectancy: ${data[i].health_life_expectancy}</b><br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
 // create layer for new circle group
@@ -2200,7 +2200,7 @@ for (var i = 0; i < data.length; i++) {
       color: "white",
       fillColor: color,
       radius: 1/(Math.sqrt(data[i].health_life_expectancy)) * 120000
-    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br>GDP Per Capita: ${data[i].economy_gdp_per_capita}<br>Family Score: ${data[i].family_info}<br><b>Life Expectancy: ${data[i].health_life_expectancy}</b><br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
 // create layer for new circle group
@@ -2237,7 +2237,7 @@ for (var i = 0; i < data.length; i++) {
       color: "white",
       fillColor: color,
       radius: Math.sqrt(data[i].trust_government_corruption) * 275000
-    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br>GDP Per Capita: ${data[i].economy_gdp_per_capita}<br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br><b>Government Trust Score: ${data[i].trust_government_corruption}</b><br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
 // create layer for new circle group
