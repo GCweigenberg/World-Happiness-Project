@@ -35,52 +35,89 @@ var overlays = {
 
 L.control.layers(null, overlays).addTo(myMap);
 
-function circleLayer(jsonObject) {
-  // array to store circles
-  var circleMarkers;
+// function circleLayer(jsonObject) {
+//   // array to store circles
+//   var circleMarkers;
 
-  // Loop through the cities array, and create one marker for each city object.
-  for (var i = 0; i < jsonObject.length; i++) {
+//   // Loop through the cities array, and create one marker for each city object.
+//   for (var i = 0; i < jsonObject.length; i++) {
 
-    // Conditionals for country gdp_pc
-    var color = "";
-    if (jsonObject[i].gdp_pc > 100000) {
-      color = "yellow";
-    }
-    else if (jsonObject[i].gdp_pc > 75000) {
-      color = "blue";
-    }
-    else if (jsonObject[i].gdp_pc > 50000) {
-      color = "green";
-    }
-    else {
-      color = "violet";
-    }
+//     // Conditionals for country gdp_pc
+//     var color = "";
+//     if (jsonObject[i].gdp_pc > 100000) {
+//       color = "yellow";
+//     }
+//     else if (jsonObject[i].gdp_pc > 75000) {
+//       color = "blue";
+//     }
+//     else if (jsonObject[i].gdp_pc > 50000) {
+//       color = "green";
+//     }
+//     else {
+//       color = "violet";
+//     }
 
-    // Add circles to the map.
-    var newMarker = L.circle(jsonObject[i].location, {
-      fillOpacity: 0.75,
-      color: "white",
-      fillColor: color,
-      radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
-    }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`);
-    newMarker.addTo(circleMarkers)
-  }
+//     // Add circles to the map.
+//     var newMarker = L.circle(jsonObject[i].location, {
+//       fillOpacity: 0.75,
+//       color: "white",
+//       fillColor: color,
+//       radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
+//     }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`);
+//     newMarker.addTo(circleMarkers)
+//   }
 
-  layers.layerTest = L.layerGroup(circleMarkers);
-}
+//   layers.layerTest = L.layerGroup(circleMarkers);
+// }
 
-function layerFetch(jsonFile)  {
-  let dataFilePath = `static/${jsonFile}`;
+// create a function to build each layer
+
+function layerOneFetch(jsonFile)  {
+  var dataFilePath = `static/${jsonFile}`;
   fetch(dataFilePath)
     .then((response) => response.json())
-    .then(json => {
-      console.log(json.data);
-      return circleLayer(json.data);
+    .then(function(json) {
+      var jsonObject = json.data;
+      var circleMarkers;
+
+      //THIS LOGS
+      console.log(jsonObject);
+
+      //THIS MAY NOT WORK
+      for (var i = 0; i < jsonObject.length; i++) {
+        
+        //THIS DOES NOT LOG ???
+        console.log(jsonObject[i]);
+
+        // Conditionals for country gdp_pc
+        var color = "";
+        if (jsonObject[i].gdp_pc > 100000) {
+          color = "yellow";
+        }
+        else if (jsonObject[i].gdp_pc > 75000) {
+          color = "blue";
+        }
+        else if (jsonObject[i].gdp_pc > 50000) {
+          color = "green";
+        }
+        else {
+          color = "violet";
+        }
+        
+        // Add circles to the map.
+        var newMarker = L.circle(jsonObject[i].location, {
+          fillOpacity: 0.75,
+          color: "white",
+          fillColor: color,
+          radius: Math.sqrt(jsonObject[i].gdp_pc) * 500
+        }).bindPopup(`<h1>${jsonObject[i].name}</h1> <hr> <h3>GDP Per Capita (USD): ${jsonObject[i].gdp_pc}</h3>`);
+        newMarker.addTo(circleMarkers);
+      }
+      console.log(`"circleMarkers" length: ${circleMarkers.length}`)
+      layers.layerTest = L.layerGroup(circleMarkers).addTo(myMap);
     });
 }
 
 // create variable for JSON data
 
-layers.layerTest = layerFetch('data.json');
-console.log(layers.layerTest);
+layerOneFetch('data.json');
