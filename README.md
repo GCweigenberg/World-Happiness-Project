@@ -6,6 +6,13 @@ Purpose: The purpose of this project is to tell a story using data visualization
 
 Data source: https://www.kaggle.com/datasets/unsdsn/world-happiness
 
+Data points:
+GDP Per Capita. 
+Family Score. 
+Life Expectancy. 
+Government Trust Score. 
+Generosity Score. 
+
 Process:  
 (1) Create a database to store our data from the World Happiness Report.  
 (2) Use geocode to extract coordinates for each country in our data set.  
