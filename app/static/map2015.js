@@ -9,8 +9,8 @@ var map = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(myMap);
 
-// declare variables for datasets
-var data2015 = [
+// declare variables for this years dataset (copied from corresponding json file)
+var data = [
     {
         "country": "Switzerland",
         "happiness_rank": 1,
@@ -1912,196 +1912,190 @@ var data2015 = [
 ];
 
 // declare variables for circle groups
-var circles2015 = [];
-var circles2016 = [];
-var circles2017 = [];
-var circles2018 = [];
-var circles2019 = [];
+var circles = [];
 
 // iterate through datasets to generate circle groups
-for (var i = 0; i < data2015.length; i++) {
+for (var i = 0; i < data.length; i++) {
 
     // Conditionals for country happiness
     var color = "";
-    if (data2015[i].happiness_rank < 11) {
+    if (data[i].happiness_rank < 11) {
       color = "green";
     }
-    else if (data2015[i].happiness_rank < 26) {
+    else if (data[i].happiness_rank < 26) {
       color = "yellow";
     }
-    else if (data2015[i].happiness_rank < 51) {
+    else if (data[i].happiness_rank < 51) {
       color = "orange";
     }
-    else if (data2015[i].happiness_rank < 101) {
+    else if (data[i].happiness_rank < 101) {
       color = "red";
     }
     else {
       color = "brown";
     }
 
-    var circleLocation = [data2015[i].lat, data2015[i].lon];
+    var circleLocation = [data[i].lat, data[i].lon];
     
     // Add circles to the map.
-    circles2015.push(L.circle(circleLocation, {
+    circles.push(L.circle(circleLocation, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2015[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2015[i].country}</h1> <hr> <h3>Happiness Rank: ${data2015[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(data[i].economy_gdp_per_capita) * 200000
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
-// create layer for 2015 circles
-var layer2015 = L.layerGroup(circles2015);
+// create layer for new circle group
+var layer1 = L.layerGroup(circles);
 
+circles = [];
 
-
-// iterate 2016
-for (var i = 0; i < data2016.length; i++) {
+// iterate through datasets to generate circle groups
+for (var i = 0; i < data.length; i++) {
 
     // Conditionals for country happiness
     var color = "";
-    if (data2016[i].happiness_rank < 11) {
+    if (data[i].happiness_rank < 11) {
       color = "green";
     }
-    else if (data2016[i].happiness_rank < 26) {
+    else if (data[i].happiness_rank < 26) {
       color = "yellow";
     }
-    else if (data2016[i].happiness_rank < 51) {
+    else if (data[i].happiness_rank < 51) {
       color = "orange";
     }
-    else if (data2016[i].happiness_rank < 101) {
+    else if (data[i].happiness_rank < 101) {
       color = "red";
     }
     else {
       color = "brown";
     }
 
-    var circleLocation = [data2016[i].lat, data2016[i].lon];
+    var circleLocation = [data[i].lat, data[i].lon];
     
     // Add circles to the map.
-    circles2016.push(L.circle(circleLocation, {
+    circles.push(L.circle(circleLocation, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2016[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2016[i].country}</h1> <hr> <h3>Happiness Rank: ${data2016[i].happiness_rank}</h3>`));
+      radius: 1/(Math.sqrt(data[i].economy_gdp_per_capita)) * 150000
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
-// create layer for 2016 circles
-var layer2016 = L.layerGroup(circles2016);
+// create layer for new circle group
+var layer2 = L.layerGroup(circles);
 
+circles = [];
 
-
-// iterate 2017
-for (var i = 0; i < data2017.length; i++) {
+// iterate through datasets to generate circle groups
+for (var i = 0; i < data.length; i++) {
 
     // Conditionals for country happiness
     var color = "";
-    if (data2017[i].happiness_rank < 11) {
+    if (data[i].happiness_rank < 11) {
       color = "green";
     }
-    else if (data2017[i].happiness_rank < 26) {
+    else if (data[i].happiness_rank < 26) {
       color = "yellow";
     }
-    else if (data2017[i].happiness_rank < 51) {
+    else if (data[i].happiness_rank < 51) {
       color = "orange";
     }
-    else if (data2017[i].happiness_rank < 101) {
+    else if (data[i].happiness_rank < 101) {
       color = "red";
     }
     else {
       color = "brown";
     }
 
-    var circleLocation = [data2017[i].lat, data2017[i].lon];
+    var circleLocation = [data[i].lat, data[i].lon];
     
     // Add circles to the map.
-    circles2017.push(L.circle(circleLocation, {
+    circles.push(L.circle(circleLocation, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2017[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2017[i].country}</h1> <hr> <h3>Happiness Rank: ${data2017[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(data[i].health_life_expectancy) * 200000
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
-// create layer for 2017 circles
-var layer2017 = L.layerGroup(circles2017);
+// create layer for new circle group
+var layer3 = L.layerGroup(circles);
 
+circles = [];
 
-
-
-// iterate 2018
-for (var i = 0; i < data2018.length; i++) {
+// iterate through datasets to generate circle groups
+for (var i = 0; i < data.length; i++) {
 
     // Conditionals for country happiness
     var color = "";
-    if (data2018[i].happiness_rank < 11) {
+    if (data[i].happiness_rank < 11) {
       color = "green";
     }
-    else if (data2018[i].happiness_rank < 26) {
+    else if (data[i].happiness_rank < 26) {
       color = "yellow";
     }
-    else if (data2018[i].happiness_rank < 51) {
+    else if (data[i].happiness_rank < 51) {
       color = "orange";
     }
-    else if (data2018[i].happiness_rank < 101) {
+    else if (data[i].happiness_rank < 101) {
       color = "red";
     }
     else {
       color = "brown";
     }
 
-    var circleLocation = [data2018[i].lat, data2018[i].lon];
+    var circleLocation = [data[i].lat, data[i].lon];
     
     // Add circles to the map.
-    circles2018.push(L.circle(circleLocation, {
+    circles.push(L.circle(circleLocation, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2018[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2018[i].country}</h1> <hr> <h3>Happiness Rank: ${data2018[i].happiness_rank}</h3>`));
+      radius: 1/(Math.sqrt(data[i].health_life_expectancy)) * 120000
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
-// create layer for 2018 circles
-var layer2018 = L.layerGroup(circles2018);
+// create layer for new circle group
+var layer4 = L.layerGroup(circles);
 
+circles = [];
 
-
-// iterate 2019
-for (var i = 0; i < data2019.length; i++) {
+// iterate through datasets to generate circle groups
+for (var i = 0; i < data.length; i++) {
 
     // Conditionals for country happiness
     var color = "";
-    if (data2019[i].happiness_rank < 11) {
+    if (data[i].happiness_rank < 11) {
       color = "green";
     }
-    else if (data2019[i].happiness_rank < 26) {
+    else if (data[i].happiness_rank < 26) {
       color = "yellow";
     }
-    else if (data2019[i].happiness_rank < 51) {
+    else if (data[i].happiness_rank < 51) {
       color = "orange";
     }
-    else if (data2019[i].happiness_rank < 101) {
+    else if (data[i].happiness_rank < 101) {
       color = "red";
     }
     else {
       color = "brown";
     }
 
-    var circleLocation = [data2019[i].lat, data2019[i].lon];
+    var circleLocation = [data[i].lat, data[i].lon];
     
     // Add circles to the map.
-    circles2019.push(L.circle(circleLocation, {
+    circles.push(L.circle(circleLocation, {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2019[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2019[i].country}</h1> <hr> <h3>Happiness Rank: ${data2019[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(data[i].trust_government_corruption) * 275000
+    }).bindPopup(`<h1>${data[i].country}</h1><hr><body>Happiness Rank: ${data[i].happiness_rank}<br>Happiness Score: ${data[i].happiness_score}<br><b>GDP Per Capita: ${data[i].economy_gdp_per_capita}</b><br>Family Score: ${data[i].family_info}<br>Life Expectancy: ${data[i].health_life_expectancy}<br>Government Trust Score: ${data[i].trust_government_corruption}<br>Generosity Score: ${data[i].generosity}</body>`));
 }
 
-// create layer for 2019 circles
-var layer2019 = L.layerGroup(circles2019);
-
+// create layer for new circle group
+var layer5 = L.layerGroup(circles);
 
 //
 
@@ -2110,13 +2104,11 @@ var baseMaps = {
   };
 
 var overlayMaps = {
-    2015: layer2015,
-    2016: layer2016,
-    2017: layer2017,
-    2018: layer2018,
-    2019: layer2019
+    "Highest GDP": layer1,
+    "Lowest GDP": layer2,
+    "Highest Life Expectancy": layer3,
+    "Lowest Life Expectancy": layer4,
+    "Trusts Government": layer5
 };
 
-L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-}).addTo(myMap);
+L.control.layers(overlayMaps).addTo(myMap);

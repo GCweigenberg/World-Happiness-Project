@@ -9647,8 +9647,8 @@ for (var i = 0; i < data2015.length; i++) {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2015[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2015[i].country}</h1> <hr> <h3>Happiness Rank: ${data2015[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(1/(data2015[i].happiness_rank)) * 1000000
+    }).bindPopup(`<h1>${data2015[i].country}</h1><hr><h3>Happiness Rank: ${data2015[i].happiness_rank}<br>Happiness Score: ${data2015[i].happiness_score}<br>GDP Per Capita: ${data2015[i].economy_gdp_per_capita}<br>Family Score: ${data2015[i].family_info}<br>Life Expectancy: ${data2015[i].health_life_expectancy}<br>Government Trust Score: ${data2015[i].trust_government_corruption}<br>Generosity Score: ${data2015[i].generosity}</h3>`));
 }
 
 // create layer for 2015 circles
@@ -9684,8 +9684,8 @@ for (var i = 0; i < data2016.length; i++) {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2016[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2016[i].country}</h1> <hr> <h3>Happiness Rank: ${data2016[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(1/(data2016[i].happiness_rank)) * 1000000
+    }).bindPopup(`<h1>${data2016[i].country}</h1><hr><h3>Happiness Rank: ${data2016[i].happiness_rank}<br>Happiness Score: ${data2016[i].happiness_score}<br>GDP Per Capita: ${data2016[i].economy_gdp_per_capita}<br>Family Score: ${data2016[i].family_info}<br>Life Expectancy: ${data2016[i].health_life_expectancy}<br>Government Trust Score: ${data2016[i].trust_government_corruption}<br>Generosity Score: ${data2016[i].generosity}</h3>`));
 }
 
 // create layer for 2016 circles
@@ -9721,8 +9721,8 @@ for (var i = 0; i < data2017.length; i++) {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2017[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2017[i].country}</h1> <hr> <h3>Happiness Rank: ${data2017[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(1/(data2017[i].happiness_rank)) * 1000000
+    }).bindPopup(`<h1>${data2017[i].country}</h1><hr><h3>Happiness Rank: ${data2017[i].happiness_rank}<br>Happiness Score: ${data2017[i].happiness_score}<br>GDP Per Capita: ${data2017[i].economy_gdp_per_capita}<br>Family Score: ${data2017[i].family_info}<br>Life Expectancy: ${data2017[i].health_life_expectancy}<br>Government Trust Score: ${data2017[i].trust_government_corruption}<br>Generosity Score: ${data2017[i].generosity}</h3>`));
 }
 
 // create layer for 2017 circles
@@ -9759,8 +9759,8 @@ for (var i = 0; i < data2018.length; i++) {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2018[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2018[i].country}</h1> <hr> <h3>Happiness Rank: ${data2018[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(1/(data2018[i].happiness_rank)) * 1000000
+    }).bindPopup(`<h1>${data2018[i].country}</h1><hr><h3>Happiness Rank: ${data2018[i].happiness_rank}<br>Happiness Score: ${data2018[i].happiness_score}<br>GDP Per Capita: ${data2018[i].economy_gdp_per_capita}<br>Family Score: ${data2018[i].family_info}<br>Life Expectancy: ${data2018[i].health_life_expectancy}<br>Government Trust Score: ${data2018[i].trust_government_corruption}<br>Generosity Score: ${data2018[i].generosity}</h3>`));
 }
 
 // create layer for 2018 circles
@@ -9796,8 +9796,8 @@ for (var i = 0; i < data2019.length; i++) {
       fillOpacity: 0.75,
       color: "white",
       fillColor: color,
-      radius: Math.sqrt(data2019[i].happiness_score) * 100000
-    }).bindPopup(`<h1>${data2019[i].country}</h1> <hr> <h3>Happiness Rank: ${data2019[i].happiness_rank}</h3>`));
+      radius: Math.sqrt(1/(data2019[i].happiness_rank)) * 1000000
+    }).bindPopup(`<h1>${data2019[i].country}</h1><hr><body><b>Happiness Rank: ${data2019[i].happiness_rank}</b><br>Happiness Score: ${data2019[i].happiness_score}<br>GDP Per Capita: ${data2019[i].economy_gdp_per_capita}<br>Family Score: ${data2019[i].family_info}<br>Life Expectancy: ${data2019[i].health_life_expectancy}<br>Government Trust Score: ${data2019[i].trust_government_corruption}<br>Generosity Score: ${data2019[i].generosity}</body>`));
 }
 
 // create layer for 2019 circles
@@ -9818,6 +9818,4 @@ var overlayMaps = {
     2019: layer2019
 };
 
-L.control.layers(baseMaps, overlayMaps, {
-    collapsed: false
-}).addTo(myMap);
+L.control.layers(overlayMaps).addTo(myMap);

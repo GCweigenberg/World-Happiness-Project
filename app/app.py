@@ -13,10 +13,13 @@ def root():
     
 #@app.route('/data_2015') 
 #Run function below at webpage route above
-@app.route('/2015')
-def map2015():
+@app.route('/main')
+def mapMain():
     return render_template('index.html')
 
+@app.route('/2015')
+def map2015():
+    return render_template('map2015.html')
 
 @app.route('/2016')
 def map2016():
