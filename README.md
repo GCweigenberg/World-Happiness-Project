@@ -11,7 +11,7 @@ Process:
 (2) Use geocode to extract coordinates for each country in our data set.  
 (3) Use SQL Alchemy to query our database and then merge with coordinates using pandas.  
 (4) Convert DataFrame to a JSON file.  
-(5) Set up Flask endpoints to read HTML files.
+(5) Set up Flask endpoints to read HTML files.  
 (6) HTML file sets up Leaflet and reads JavaScript file for data.
 
 <img width="1470" alt="Screen Shot 2023-02-27 at 4 31 11 PM" src="https://user-images.githubusercontent.com/116036703/221701168-f524e4fa-3160-4500-b744-3400b817068d.png">
