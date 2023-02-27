@@ -3,28 +3,38 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Basic Map</title>
+  <title>HomePage</title>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin="" />
-
-  <!-- Leaflet JavaScript code -->
-  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-
-  <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-</head>
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+  </head>
 
 <body>
-  <!-- The div where we'll insert our map -->
-  <div id="map"></div>
 
-  <!-- JavaScript file -->
-  <script type="text/javascript" src="{{url_for('static', filename='logic2.js')}}"></script>
+  <h1>World Happiness Project</h1>
+  
+  <h3>Maps</h3>
+
+    <ol>
+      <a href="{{url_for('mapMain')}}"> All Years</a>
+      <a href="{{url_for('map2015')}}"> 2015</a>
+      <a href="{{url_for('map2016')}}"> 2016</a>
+      <a href="{{url_for('map2017')}}"> 2017</a>
+      <a href="{{url_for('map2018')}}"> 2018</a>
+      <a href="{{url_for('map2019')}}"> 2019</a>
+    </ol>
+
+    <t>Each map displays up to 157 countries. A circle represents each country by Happiness Rank according to color.</t><br><br>
+
+    <t>Rank 1-10: Green</t><br>
+    <t>Rank 11-25: Yellow</t><br>
+    <t>Rank 26-50: Orange</t><br>
+    <t>Rank 51-100: Red</t><br>
+    <t>Rank 101-157: Brown</t><br><br>
+
+    <t>Each map represents each country differently by size according to a selectable factor.</t><br>
+    <t>I.e. GDP (Per Capita), Life Expectancy, and Government Trust.</t>
+
 </body>
 
 </html>

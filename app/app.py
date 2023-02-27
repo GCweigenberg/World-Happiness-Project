@@ -9,13 +9,13 @@ app = Flask(__name__, template_folder='templates')
 
 @app.route('/') # if someone goes to webpage, i want you to run this function and i want you to give back this response
 def root():
-    return render_template('root.html')
+    return render_template('index.html')
     
 #@app.route('/data_2015') 
 #Run function below at webpage route above
 @app.route('/main')
 def mapMain():
-    return render_template('index.html')
+    return render_template('mainMap.html')
 
 @app.route('/2015')
 def map2015():
