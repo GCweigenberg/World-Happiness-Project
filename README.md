@@ -14,4 +14,10 @@ Process:
 (5)   
 (6) Use Flask to read html files.  
 
+<img width="1470" alt="Screen Shot 2023-02-27 at 4 31 11 PM" src="https://user-images.githubusercontent.com/116036703/221701168-f524e4fa-3160-4500-b744-3400b817068d.png">
+
+<img width="1470" alt="Screen Shot 2023-02-27 at 4 35 29 PM" src="https://user-images.githubusercontent.com/116036703/221701567-4d7782ed-f537-42d9-b82c-6f9e46e17a4c.png">
+
+
 Conclusion:
+
